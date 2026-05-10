@@ -13,7 +13,11 @@ fi
 
 PYTHON_BIN="${ROOT_DIR}/venv/bin/python"
 if [[ ! -x "$PYTHON_BIN" ]]; then
-  python3 -m venv venv
+  if command -v python3.12 >/dev/null 2>&1; then
+    python3.12 -m venv venv
+  else
+    python3 -m venv venv
+  fi
   echo "[setup] Created virtual environment at venv/"
 fi
 

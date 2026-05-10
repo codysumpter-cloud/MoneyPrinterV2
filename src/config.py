@@ -7,6 +7,23 @@ from termcolor import colored
 
 ROOT_DIR = os.path.dirname(sys.path[0])
 
+
+def load_local_env() -> None:
+    """Load local, chmod-600-style env file without requiring shell sourcing."""
+    env_path = os.path.expanduser("~/.config/moneyprinterv2/env")
+    if not os.path.exists(env_path):
+        return
+    with open(env_path, "r", encoding="utf-8") as file:
+        for raw_line in file:
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_local_env()
+
 def assert_folder_structure() -> None:
     """
     Make sure that the nessecary folder structure is present.

@@ -7,9 +7,10 @@ soundfile
 prettytable
 webdriver_manager
 selenium_firefox
-selenium
+selenium<4.11
 ollama
-moviepy
+moviepy<2
+numpy<2
 Pillow>=10.0.0
 yagmail
 assemblyai
